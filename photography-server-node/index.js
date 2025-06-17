@@ -82,7 +82,7 @@ app.post("/register", (req, res) => {
             console.log("Error:", err);
             return res.status(500).send("Error saving user data.");
         }
-        res.redirect("/login");
+        res.redirect("/");
     });
 });
 
