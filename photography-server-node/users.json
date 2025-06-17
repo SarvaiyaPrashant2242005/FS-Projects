@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Prashant Sarvaiya",
+    "email": "prashanthere90@gmail.com",
+    "password": "123123",
+    "confirm-password": "123123"
+  },
+  {
+    "id": 2,
+    "name": "Prashant Sarvaiya",
+    "email": "prashanthere90@gmail.com",
+    "password": "123123",
+    "confirm-password": "123123"
+  },
+  {
+    "id": 3,
+    "name": "Prashant Sarvaiya",
+    "email": "prashanthere90@gmail.com",
+    "password": "123123",
+    "confirm-password": "123123"
+  },
+  {
+    "id": 4,
+    "name": "Neel Raiyani",
+    "email": "neel@gmail.com",
+    "password": "123456",
+    "confirm-password": "123456"
+  },
+  {
+    "id": 5,
+    "name": "Neel Raiyani",
+    "email": "neel@gmail.com",
+    "password": "123456",
+    "confirm-password": "123456"
+  },
+  {
+    "id": 6,
+    "name": "Jenil Vaghasiya",
+    "email": "jenil@gmail.com",
+    "password": "123456",
+    "confirm-password": "123456"
+  },
+  {
+    "id": 7,
+    "name": "Hency Depani",
+    "email": "hencydepani@gmail.com",
+    "password": "123456"
+  },
+  {
+    "id": 8,
+    "name": "Hency Depani",
+    "email": "hencydepani@gmail.com",
+    "password": "123456"
+  },
+  {
+    "id": 9,
+    "name": "MSD",
+    "email": "msd@gmail.com",
+    "password": "123456"
+  }
+]
