@@ -21,6 +21,29 @@ app.get("/login", (req,res) => {
     res.sendFile(path.join(__dirname, "view", "template", "login.html"));
 })
 
+app.get("/dashboard", (req,res) => {
+    res.sendFile(path.join(__dirname, "view", "template", "index.html"));
+})
+
+app.post("/login", (req, res) => {
+    const { email, password } = req.body;
+
+    const userCheck = users.find((user) => user.email === email && user.password === password);
+
+    if (!userCheck) {
+        return res.send(`
+            <script>
+                alert("Invalid email or password.");
+                window.history.back();
+            </script>
+        `);
+    }
+
+    // ✅ Redirect to dashboard on successful login
+    res.redirect("/dashboard");
+});
+
+
 
 app.post("/register", (req, res) => {
     const { name, email, password,confirmPassword  } = req.body;
