@@ -17,7 +17,7 @@ app.get("/register", (req, res) => {
     res.sendFile(path.join(__dirname, "view", "template", "register.html"));
 });
 
-app.get("/login", (req,res) => {
+app.get("/", (req,res) => {
     res.sendFile(path.join(__dirname, "view", "template", "login.html"));
 })
 
@@ -25,7 +25,7 @@ app.get("/dashboard", (req,res) => {
     res.sendFile(path.join(__dirname, "view", "template", "index.html"));
 })
 
-app.post("/login", (req, res) => {
+app.post("/", (req, res) => {
     const { email, password } = req.body;
 
     const userCheck = users.find((user) => user.email === email && user.password === password);
