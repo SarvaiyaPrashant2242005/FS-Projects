@@ -1,0 +1,123 @@
+:root {
+  --primary-color: #ff4e50;
+  --dark-color: #222;
+  --light-color: #fff;
+  --accent-color: #f7f7f7;
+  --text-color: #333;
+  --background-color: #f4f4f4;
+  --accent-pink: #e91e63;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container {
+  background: var(--light-color);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--accent-pink);
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+label {
+  font-weight: 500;
+  color: var(--dark-color);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--accent-color);
+  border-radius: 12px;
+  background: var(--light-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 78, 80, 0.1);
+}
+
+input::placeholder {
+  color: #999;
+  opacity: 0.7;
+}
+
+.register-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-pink));
+  color: var(--light-color);
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.register-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255, 78, 80, 0.3);
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--accent-color);
+}
+
+.login-link p {
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
+
+.login-link a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-link a:hover {
+  color: var(--accent-pink);
+  text-decoration: underline;
+}
+
+
