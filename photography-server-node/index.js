@@ -1,11 +1,31 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const port = 3001;
-let users = require("./users.json");
-const fs = require("fs");
 const path = require("path");
 
+const MONGO_URI = ("mongodb://127.0.0.1:27017/FS_project")
 
 const app = express();
+
+mongoose.connect(MONGO_URI)
+.then(() => {
+    console.log("DB connection established...");
+    
+})
+.catch((error) => {
+    console.log("Error in DB connection...",error);
+    
+})
+
+const userSchema = new mongoose.Schema({
+    id: { type: Number, unique: true, required: true },
+    name: { type: String, required: true },
+    email: { type: String, unique: true, required: true },
+    password: { type: String, required: true }
+})
+
+const userModel = mongoose.model("user", userSchema)
+
 
 // Middlewares
 app.use(express.static(path.join(__dirname, "view")));
@@ -25,29 +45,32 @@ app.get("/dashboard", (req,res) => {
     res.sendFile(path.join(__dirname, "view", "template", "index.html"));
 })
 
-app.post("/", (req, res) => {
+app.post("/", async (req, res) => {
     const { email, password } = req.body;
 
-    const userCheck = users.find((user) => user.email === email && user.password === password);
-
-    if (!userCheck) {
-        return res.send(`
-            <script>
-                alert("Invalid email or password.");
-                window.history.back();
-            </script>
-        `);
+    try {
+        // Check user in MongoDB
+        const userCheck = await userModel.findOne({ email, password });
+        if (!userCheck) {
+            return res.send(`
+                <script>
+                    alert("Invalid email or password.");
+                    window.history.back();
+                </script>
+            `);
+        }
+        res.redirect("/dashboard");
+    } catch (err) {
+        console.log("Error:", err);
+        res.status(500).send("Error checking user data.");
     }
-
-    // ✅ Redirect to dashboard on successful login
-    res.redirect("/dashboard");
 });
 
 
 
-app.post("/register", (req, res) => {
-    const { name, email, password,confirmPassword  } = req.body;
- 
+app.post("/register", async (req, res) => {
+    const { name, email, password, confirmPassword } = req.body;
+
     if (password !== confirmPassword) {
         return res.send(`
             <script>
@@ -57,33 +80,32 @@ app.post("/register", (req, res) => {
         `);
     }
 
-    const emailCheck = users.find((user) => user.email == email);
-
-    if(emailCheck){
+    // Check if email already exists in the database
+    const emailCheck = await userModel.findOne({ email });
+    if (emailCheck) {
         return res.send(`
             <script>
                 alert("Email already exists. Please use a different one or Login.");
                 window.history.back();
             </script>
-        `)
+        `);
     }
 
-    const newData = {
-        id: users.length + 1,
+    // Create new user in MongoDB
+    const newUser = new userModel({
+        id: Date.now(), 
         name,
         email,
-        password 
-    };
-
-    users.push(newData);
-
-    fs.writeFile("users.json", JSON.stringify(users, null, 2), (err) => {
-        if (err) {
-            console.log("Error:", err);
-            return res.status(500).send("Error saving user data.");
-        }
-        res.redirect("/");
+        password
     });
+
+    try {
+        await newUser.save();
+        res.redirect("/");
+    } catch (err) {
+        console.log("Error:", err);
+        res.status(500).send("Error saving user data.");
+    }
 });
 
 
